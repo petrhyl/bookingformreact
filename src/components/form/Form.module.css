@@ -1,0 +1,43 @@
+.formMain {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(223, 255, 255);
+    border-radius: 6px;
+}
+
+.formGroup {
+    width: 98%;
+    display: grid;
+    grid-template-columns: 48% 48%;
+    column-gap: 2%;
+    margin: 0 auto;
+}
+
+.inputButton {
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 6px;
+    font-size: 13pt;
+    font-weight: 600;
+    border: 0;
+    color: rgb(0, 51, 59);
+    background-color: rgb(166, 227, 255);
+    box-shadow: 0 0 5px 2px rgb(40, 115, 255) inset;
+    width: 50%;
+}
+
+.inputButton:hover{
+    background-color: rgb(184, 233, 255);
+    box-shadow: 0 0 5px 2px rgb(62, 129, 255) inset;
+    color: rgb(0, 35, 41);
+}
+
+.inputButton:active{
+    border: 1px solid rgb(15, 87, 221);
+    padding: 9px;
+}
+
+.warning {
+    color: rgb(214, 26, 73);
+}

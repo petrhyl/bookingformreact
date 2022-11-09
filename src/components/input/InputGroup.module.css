@@ -1,0 +1,27 @@
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 10px;
+    width: 100%;
+    height: fit-content;
+    font-weight: 400;
+    color: rgb(27, 49, 97);
+  }
+
+.input{
+  padding: 5px;
+  margin-top: 2px;
+  border-radius: 6px;
+  font-size: 13pt;
+  font-weight: 600;
+  border: 1px solid rgb(81, 127, 255);
+  color: rgb(0, 5, 71);
+}
+
+.input:focus{
+  outline: 0;
+  box-shadow: 0 0 3px 1px rgb(81, 127, 255) inset;
+}
+
+
+

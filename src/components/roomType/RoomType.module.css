@@ -1,0 +1,43 @@
+.card {
+    height: 470px;
+    width: 380px;
+    color: rgb(27, 0, 11);
+    background-color: rgb(255, 240, 247);
+    border: 1px solid rgb(15, 87, 221);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr 4fr 1fr;
+    box-shadow: 4px -4px 5px 0px rgb(177, 179, 187);
+}
+
+.card img {
+    margin: auto;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.card > div{
+    padding: 9px;
+}
+
+.submit {
+    padding: 10px 25px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 0;
+    color: rgb(0, 46, 53);
+    background-color: rgb(159, 225, 255);
+    box-shadow: 0 0 4px 1px rgb(29, 102, 236) inset;
+}
+
+.submit:hover {
+    background-color: rgb(180, 230, 253);
+    box-shadow: 0 0 4px 1px rgb(54, 124, 255) inset;
+    color: rgb(0, 40, 46);
+}
+
+.submit:active {
+    border: 1px solid rgb(14, 80, 202);
+    padding: 9px 24px;
+}

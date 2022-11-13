@@ -4,7 +4,7 @@ import cssStyles from './InputGroup.module.css';
 const InputGroup = props=>{
   const currentDate=useRef();
 
-  const onChangeHandler=()=>{
+  const onChangeHandler=()=>{;
     props.change(currentDate.current.value);
   }
 

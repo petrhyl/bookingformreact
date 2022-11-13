@@ -14,6 +14,16 @@
     margin: 0 auto;
 }
 
+.formSection {
+    width: 98%;
+    margin: 0 auto;
+    padding: 15px 1%;
+}
+
+.formSection>p {
+    margin-bottom: 5px;
+}
+
 .inputButton {
     padding: 10px;
     margin: 10px auto;
@@ -27,17 +37,18 @@
     width: 50%;
 }
 
-.inputButton:hover{
+.inputButton:hover {
     background-color: rgb(184, 233, 255);
     box-shadow: 0 0 5px 2px rgb(62, 129, 255) inset;
     color: rgb(0, 35, 41);
 }
 
-.inputButton:active{
+.inputButton:active {
     border: 1px solid rgb(15, 87, 221);
     padding: 9px;
 }
 
 .warning {
-    color: rgb(214, 26, 73);
+    padding: 0 20px;
+    color: rgb(207, 20, 67);
 }

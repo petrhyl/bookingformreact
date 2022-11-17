@@ -21,51 +21,55 @@ const dateReduser = (state, action) => {
     let areValid = true;
     let warningText = '';
 
-    if (action.type === DATE_FROM) {
-        if (d < currentDate) {
-            areValid = false;
-            warningText = 'Prosím, vyberte pozdější datum příjezdu.';
-        } else if (state.dateTo !== null) {
-            if (d >= state.dateTo) {
+    switch (action.type) {
+        case DATE_FROM:
+            if (d < currentDate) {
                 areValid = false;
-                warningText = 'Datum příjezdu musí být dřívější než datum odjezdu.';
-            }
-        }
-
-        return {
-            ...state,
-            dateFrom: d,
-            areDatesValid: areValid,
-            dateWarningText: warningText
-        }
-    }
-
-    if (action.type === DATE_TO) {
-        if (d <= currentDate) {
-            areValid = false;
-            warningText = 'Prosím, vyberte pozdější datum odjezdu.';
-        } else if (state.dateFrom !== null) {
-            if (d > state.dateFrom) {
-                if (state.dateFrom < currentDate) {
+                warningText = 'Prosím, vyberte pozdější datum příjezdu.';
+            } else if (state.dateTo !== null) {
+                if (d >= state.dateTo) {
                     areValid = false;
-                    warningText = 'Prosím, vyberte pozdější datum příjezdu.';
-                } else {
-                    areValid = true;
+                    warningText = 'Datum příjezdu musí být dřívější než datum odjezdu.';
                 }
-            } else {
-                areValid = false;
-                warningText = 'Datum příjezdu musí být dřívější než datum odjezdu.';
             }
-        }
-        return {
-            ...state,
-            dateTo: d,
-            areDatesValid: areValid,
-            dateWarningText: warningText
-        }
-    }
 
-    return defaultDateState;
+            return {
+                ...state,
+                dateFrom: d,
+                areDatesValid: areValid,
+                dateWarningText: warningText
+            }
+        case DATE_TO:
+            if (d <= currentDate) {
+                areValid = false;
+                warningText = 'Prosím, vyberte pozdější datum odjezdu.';
+            } else if (state.dateFrom !== null) {
+                if (d > state.dateFrom) {
+                    if (state.dateFrom < currentDate) {
+                        areValid = false;
+                        warningText = 'Prosím, vyberte pozdější datum příjezdu.';
+                    } else {
+                        areValid = true;
+                    }
+                } else {
+                    areValid = false;
+                    warningText = 'Datum příjezdu musí být dřívější než datum odjezdu.';
+                }
+            }
+
+            return {
+                ...state,
+                dateTo: d,
+                areDatesValid: areValid,
+                dateWarningText: warningText
+            }
+        default:
+            return {
+                ...state,
+                areDatesValid: areValid,
+                dateWarningText: warningText
+            }
+    }
 }
 
 const DateForm = props => {
@@ -116,7 +120,7 @@ const DateForm = props => {
                 selectingCntxt.setDateTo(strDateTo);
             }
         }
-    }, [dateState, isPersonNumValid, setIsFormValid]);
+    }, [dateState, isPersonNumValid, setIsFormValid, selectingCntxt]);
 
     const submitHandler = event => {
         event.preventDefault();

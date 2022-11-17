@@ -24,7 +24,7 @@ const ChoosingType = () => {
                 throw new Error(data.error.message);
             }
 
-            const loadedTypes = [];
+            let loadedTypes = [];
             for (let index = 1; index < data.rooms.length; index++) {
                 const element = {
                     id: data.rooms[index].ID_type,

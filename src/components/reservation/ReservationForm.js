@@ -140,7 +140,7 @@ const ReservationForm = () => {
             {!isFormValid && warningMessage()}
             <div className={cssStyles.formSection}>
                 <p>Váš pokoj:</p>
-                <h3>{selectingCntxt.roomHeader}</h3>
+                <h3>{selectingCntxt.typeName}</h3>
             </div>
             <div className={cssStyles.formSection}>
                 <input type="submit" className={cssStyles.inputButton} name="submit" value="Vytvořit rezervaci" />

@@ -3,8 +3,8 @@ import React, { useState } from "react"
 const SelectingContext = React.createContext({
     typeId:0,
     setTypeId:()=>{},
-    roomHeader:'',
-    setRoomHeader:()=>{},
+    typeName:'',
+    setTypeName:()=>{},
     dateFrom:'',
     dateTo: '',
     setDateFrom:()=>{},
@@ -13,7 +13,7 @@ const SelectingContext = React.createContext({
 
 export const SelectingContextProvider=props=>{
     const [typeId,setTypeId]=useState(0);
-    const [roomHeader,setRoomHeader]=useState('');
+    const [typeName,setTypeName]=useState('');
     const [dateFrom, setDateFrom] = useState(null);
     const [dateTo, setDateTo] = useState(null);
 
@@ -22,8 +22,8 @@ export const SelectingContextProvider=props=>{
     const selectingContext={
         typeId:typeId,        
         setTypeId:setTypeId,
-        roomHeader:roomHeader,
-        setRoomHeader:setRoomHeader,
+        typeName:typeName,
+        setTypeName:setTypeName,
         dateFrom:dateFrom,
         dateTo:dateTo,
         setDateFrom:setDateFrom,

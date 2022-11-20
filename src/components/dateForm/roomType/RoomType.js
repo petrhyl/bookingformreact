@@ -14,7 +14,7 @@ const RoomType = proc => {
     const handleSubmit=(event)=>{
         event.preventDefault();
 
-        selectingCntxt.setRoomHeader(name);
+        selectingCntxt.setTypeName(name);
         selectingCntxt.setTypeId(typeId);
 
         navigate('/reservation');

@@ -7,7 +7,7 @@ import LoadingIcon from "./icon/LoadingIcon";
 const ChoosingType = () => {
     const [isError, setIsError] = useState(false);
     const [requestErrMessage, setRequestErrorMessage] = useState('');
-    const [roomTypes, setRoomTypes] = useState();
+    const [roomTypes, setRoomTypes] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -50,7 +50,7 @@ const ChoosingType = () => {
             <DateForm submitHandler={getRooms} />
             {isError && <p className='error'>{requestErrMessage}</p>}
             {isLoading && <LoadingIcon />}
-            {isLoaded && <RoomTypeList roomTypes={roomTypes} />}
+            {isLoaded && !isError && <RoomTypeList roomTypes={roomTypes} />}
         </Fragment>
     )
 }

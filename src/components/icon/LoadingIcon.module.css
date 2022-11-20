@@ -1,0 +1,32 @@
+.area {
+    width: 100%;
+    min-height: 102px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    transform-origin: center;
+    width: 100px;
+    height: 100px;
+    background: blueviolet;
+    animation: turning;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes turning {
+    0% {
+        transform: perspective(200px) rotateX(0);
+    }
+    50% {
+        transform: perspective(200px) rotateX(180deg);
+    }
+    100% {
+        transform: perspective(200px) rotateZ(-180deg);
+    }
+}

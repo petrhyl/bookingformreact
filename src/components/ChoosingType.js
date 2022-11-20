@@ -2,6 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import SelectingContext from "../store/select-context";
 import DateForm from "./dateForm/DateForm";
 import RoomTypeList from "./dateForm/roomType/RoomTypeList";
+import LoadingIcon from "./icon/LoadingIcon";
 
 const ChoosingType = () => {
     const [isError, setIsError] = useState(false);
@@ -48,7 +49,7 @@ const ChoosingType = () => {
         <Fragment>
             <DateForm submitHandler={getRooms} />
             {isError && <p className='error'>{requestErrMessage}</p>}
-            {isLoading && <p>Loading free rooms</p>}
+            {isLoading && <LoadingIcon />}
             {isLoaded && <RoomTypeList roomTypes={roomTypes} />}
         </Fragment>
     )

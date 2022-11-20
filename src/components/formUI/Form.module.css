@@ -21,7 +21,7 @@
 }
 
 .formSection>p {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .inputButton {
@@ -51,4 +51,18 @@
 .warning {
     padding: 0 20px;
     color: rgb(207, 20, 67);
+}
+
+.success {
+    padding: 0 20px;
+    color: rgb(39, 146, 39);
+    text-align: center;
+}
+
+.info {
+    padding: 25px 0;
+    text-align: center;
+    font-size: 18pt;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
 }

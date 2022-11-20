@@ -1,39 +1,40 @@
-import { Fragment, useContext, useReducer, useState } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import SelectingContext from '../../store/select-context';
 import cssStyles from '../formUI/Form.module.css';
 import InputGroup from '../input/InputGroup';
-import { makeReservation } from '../../functions/makeReservation';
+import ReservationContext from '../../store/reservation-context';
+import { useNavigate } from 'react-router-dom';
 
 const FRSTNAME = 'FIRST_NAME';
 const LSTNAME = 'LAST_NAME';
 const MAIL = 'EMAIL';
 
-const defaultState = { 
-    firstname: true, 
-    firstnameValue:'',
+const defaultState = {
+    firstname: true,
+    firstnameValue: '',
     lastname: true,
-    lastnameValue:'',
+    lastnameValue: '',
     email: true,
-    emailValue:''
+    emailValue: ''
 };
 
 const validateInput = (state, action) => {
     let isValid = true;
     if (action.type === FRSTNAME || action.type === LSTNAME) {
-        isValid = /^[A-Z](('[A-Z]?[a-z]+)|([a-z]+'[a-z])|([a-z]+-[A-Z]?[a-z]+)|('[A-Z]?[a-z]+-[A-Z]?[a-z]+)|([a-z]*-[A-Z]?[a-z]+'[a-z])|([a-z]+))$/.test(action.input);
+        isValid = /^[A-Ž](('[A-Ž]?[a-ž]+)|([a-ž]+'[a-ž])|([a-ž]+-[A-Ž]?[a-ž]+)|('[A-Ž]?[a-ž]+-[A-Ž]?[a-ž]+)|([a-ž]*-[A-Ž]?[a-ž]+'[a-ž])|([a-ž]+))$/.test(action.input);
 
         if (action.type === FRSTNAME) {
             return {
                 ...state,
                 firstname: isValid,
-                firstnameValue:action.input
+                firstnameValue: action.input
             };
         }
 
         return {
             ...state,
             lastname: isValid,
-            lastnameValue:action.input
+            lastnameValue: action.input
         };
     }
 
@@ -43,7 +44,7 @@ const validateInput = (state, action) => {
         return {
             ...state,
             email: isValid,
-            emailValue:action.input
+            emailValue: action.input
         }
     }
 
@@ -52,8 +53,20 @@ const validateInput = (state, action) => {
 
 const ReservationForm = () => {
     const selectingCntxt = useContext(SelectingContext);
+    const reservationCntxt=useContext(ReservationContext)
     const [validatedInputs, dispatchInput] = useReducer(validateInput, defaultState);
-    const [response,setResponse]=useState({isError:false,message:''});
+    const [isFormValid, setIsFormValid] = useState(true);
+
+    const navigate=useNavigate();
+
+    useEffect(() => {
+        if (validatedInputs.firstname && validatedInputs.lastname && validatedInputs.email) {
+            setIsFormValid(true);
+            reservationCntxt.setGuestsFirstname(validatedInputs.firstnameValue);
+            reservationCntxt.setGuestLastname(validatedInputs.lastnameValue);
+            reservationCntxt.setGuestEmail(validatedInputs.emailValue);
+        }
+    }, [reservationCntxt,validatedInputs])
 
     const validateFirstNameHandler = value => {
         dispatchInput({
@@ -76,19 +89,46 @@ const ReservationForm = () => {
         });
     }
 
-    const submitHandler = event => {
+    const submitHandler =  event => {
         event.preventDefault();
 
-        let responseObject;
+        if (validatedInputs.firstname && validatedInputs.lastname && validatedInputs.email && validatedInputs.firstnameValue !== '' &&
+            validatedInputs.lastnameValue !== '' && validatedInputs.emailValue !== '') {
+            reservationCntxt.makeReservation(selectingCntxt.dateFrom, selectingCntxt.dateTo, selectingCntxt.typeId);
 
-        if (validatedInputs.firstname&&validatedInputs.lastname&&validatedInputs.email) {
-           responseObject= makeReservation(selectingCntxt.dateFrom, selectingCntxt.dateTo, selectingCntxt.typeId, validatedInputs.firstnameValue, validatedInputs.lastnameValue, validatedInputs.emailValue);
+         
+            setIsFormValid(true);
+            navigate('/response',{replace:true});
+        } else {
+            setIsFormValid(false);
         }
-        
     }
 
+    const warningMessage = () => {
+        let message = 'Prosím, vyplňte správně';
+
+        if (!validatedInputs.firstname) {
+            message = message + ' své křesní jméno';
+        }
+
+        if (!validatedInputs.lastname) {
+            if (!validatedInputs.firstname) {
+                message = message + ',';
+            }
+            message = message + ' své příjmení';
+        }
+
+        if (!validatedInputs.email) {
+            if (!validatedInputs.firstname || !validatedInputs.lastname) {
+                message = message + ',';
+            }
+            message = message + ' svůj email';
+        }
+
+        return <p className={cssStyles.warning}>{message + '.'}</p>;
+    }  
+
     return (
-        <Fragment>
         <form className={cssStyles.formMain} onSubmit={submitHandler}>
             <div className={cssStyles.formGroup}>
                 <InputGroup type="text" name="Firstname" text="Jméno" change={validateFirstNameHandler} />
@@ -97,9 +137,7 @@ const ReservationForm = () => {
             <div className={cssStyles.formGroup}>
                 <InputGroup type="email" name="mail" text="E-mail" change={validateEmailHandler} />
             </div>
-            {!validatedInputs.firstname && <p>First is not in valid form.</p>}
-            {!validatedInputs.lastname && <p>Lastname is not in valid form.</p>}
-            {!validatedInputs.email && <p>E-mail is not in valid form.</p>}
+            {!isFormValid && warningMessage()}
             <div className={cssStyles.formSection}>
                 <p>Váš pokoj:</p>
                 <h3>{selectingCntxt.roomHeader}</h3>
@@ -108,7 +146,6 @@ const ReservationForm = () => {
                 <input type="submit" className={cssStyles.inputButton} name="submit" value="Vytvořit rezervaci" />
             </div>
         </form>
-        </Fragment>
     );
 }
 

@@ -18,7 +18,7 @@ const ChoosingType = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch(`http://localhost:8008/controller/roomtypes/free.php?from=${selectingCntxt.dateFrom}&to=${selectingCntxt.dateTo}&persons=${persons}`);
+            const response = await fetch(`https://hyl-petr.xf.cz/booking/api/controller/roomtypes/free.php?from=${selectingCntxt.dateFrom}&to=${selectingCntxt.dateTo}&persons=${persons}`);
             const data = await response.json();
 
             if (!response.ok) {
@@ -26,11 +26,13 @@ const ChoosingType = () => {
             }
 
             let loadedTypes = [];
-            for (let index = 1; index < data.rooms.length; index++) {
+            for (let index = 0; index < data.rooms.length; index++) {
                 const element = {
                     id: data.rooms[index].ID_type,
                     name: data.rooms[index].name,
-                    description: data.rooms[index].description
+                    description: data.rooms[index].description,
+                    picture:data.rooms[index].picture,
+                    numberOfAvailable:data.rooms[index].numberOfAvailable
                 };
                 loadedTypes.push(element);
             }

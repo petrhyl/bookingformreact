@@ -5,15 +5,16 @@
     width: auto;
     height: fit-content;
     font-weight: 400;
+    font-size: 13pt;
     color: rgb(27, 49, 97);
   }
 
 .input{
   padding: 5px;
   margin-top: 2px;
-  border-radius: 6px;
-  font-size: 13pt;
+  border-radius: 6px;  
   font-weight: 600;
+  font-size: 13pt;
   border: 1px solid rgb(81, 127, 255);
   color: rgb(0, 5, 71);
 }
@@ -24,4 +25,16 @@
 }
 
 
+@media screen and (max-width:700px) {
+  .inputGroup{
+    width: 100%;
+  }
 
+  .inputGroup{
+    font-size: 11pt;
+  }  
+
+  .input{
+    font-size: 12pt;
+  }
+}

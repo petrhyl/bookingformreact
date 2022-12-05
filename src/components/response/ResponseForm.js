@@ -11,16 +11,16 @@ const ResponseForm = () => {
     const navigate=useNavigate();
 
     const submitHandler=() =>{
-        navigate('/',{replace:true});
+        navigate('/booking',{replace:true});
     }
 
     let message;
     if (reservationCntxt.responseBody.isError) {
         message = (
             <Fragment>
-                <p className={cssStyles.info + ' ' + cssStyles.warning}>
+                <h3 className={cssStyles.info + ' ' + cssStyles.warning}>
                     {reservationCntxt.responseBody.response.message}
-                </p>
+                </h3>
                 <p>Chcete vytvořit jinou rezervaci?</p>
             </Fragment>
         );

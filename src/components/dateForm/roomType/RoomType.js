@@ -1,5 +1,4 @@
 import cssStyles from './RoomType.module.css';
-import apartmentImg from '../../../assets/apartment.jpg';
 import { useContext } from 'react';
 import SelectingContext from '../../../store/select-context';
 import { useNavigate } from "react-router-dom";
@@ -17,7 +16,7 @@ const RoomType = proc => {
         selectingCntxt.setTypeName(name);
         selectingCntxt.setTypeId(typeId);
 
-        navigate('/reservation');
+        navigate('/booking/reservation');
     }
 
     return (
@@ -26,10 +25,11 @@ const RoomType = proc => {
                 <h3>{name}</h3>
             </div>
             <div>
-                <img src={apartmentImg} alt="room" />
+                <img src={proc.picture} alt="room" />
             </div>
             <div>
-                {proc.description}
+                <p className={cssStyles.available}>Počet volných pokojů: {proc.available}</p>
+                <p>{proc.description}</p>
             </div>
             <div>
                 <form onSubmit={handleSubmit}>

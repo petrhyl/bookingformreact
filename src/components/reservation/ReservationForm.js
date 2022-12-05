@@ -98,7 +98,7 @@ const ReservationForm = () => {
 
          
             setIsFormValid(true);
-            navigate('/response',{replace:true});
+            navigate('/booking/response',{replace:true});
         } else {
             setIsFormValid(false);
         }

@@ -25,7 +25,7 @@ export const ReservationContextProvider = (props) => {
         setIsResponded(true);
         setIsLoading(true);
         try {
-            const response = await fetch('https://hyl-petr.xf.cz/booking/api/controller/reservation/create.php', {
+            const response = await fetch(`https://hyl-petr.xf.cz/booking/api/controller/reservation/create.php`, {
                 method: 'POST',
                 body: JSON.stringify({
                     guest: {
@@ -36,7 +36,7 @@ export const ReservationContextProvider = (props) => {
                     from: dateOfArriving,
                     to: dateOfDeparting,
                     id_type: typeOfRoom
-                }),
+                }),                 
                 headers: {
                     'Content-Type': 'application/json'
                 }

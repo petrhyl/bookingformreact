@@ -18,7 +18,7 @@ function App() {
           <Route path='/booking' element={<ChoosingType />} />
           <Route path='/booking/reservation' element={selectingCntxt.typeId > 0 ? <ReservationForm /> : <Navigate to='/' replace />} />
           <Route path='/booking/response' element={reservationCntxt.isResponded ? <ResponseForm /> : <Navigate to='/' replace />} />
-          <Route path='*' element={<Navigate to='/booking' replace />} />
+          <Route path='/booking/*' element={<Navigate to='/booking' replace />} />
         </Routes>
       </div>
     </main>

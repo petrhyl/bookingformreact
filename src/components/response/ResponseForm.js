@@ -10,6 +10,9 @@ const ResponseForm = () => {
     const selectingCntxt = useContext(SelectingContext);
     const navigate=useNavigate();
 
+    const dateForm = new Date(selectingCntxt.dateFrom);
+    const dateTo = new Date(selectingCntxt.dateTo);
+
     const submitHandler=() =>{
         navigate('/booking',{replace:true});
     }
@@ -31,6 +34,10 @@ const ResponseForm = () => {
                 <div className={cssStyles.formSection}>
                     <p>Váš pokoj:</p>
                     <h3>{selectingCntxt.typeName}</h3>
+                </div>
+                <div className={cssStyles.formSection}>
+                    <p>Datum od - do:</p>
+                    <h3>{dateForm.toLocaleDateString()}&nbsp;&nbsp; - &nbsp;&nbsp;{dateTo.toLocaleDateString()}</h3>
                 </div>
                 <div className={cssStyles.formSection}>
                     <p>Číslo vaší rezervace:</p>
